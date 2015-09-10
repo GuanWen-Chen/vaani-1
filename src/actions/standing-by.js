@@ -28,16 +28,18 @@ class StandingByActions {
 
     Localizer.resolve([
       'standingBy__openCommand',
+      'standingBy__playCommand',
       'standingBy__callCommand',
       'standingBy__dialCommand',
       'standingBy__specialAppPhone',
       'standingBy__specialAppContacts'
     ]).then((entities) => {
       var openCommand = entities[0].value;
-      var callCommand = entities[1].value;
-      var dialCommand = entities[2].value;
-      var specialAppPhone = entities[3].value;
-      var specialAppContacts = entities[4].value;
+      var playCommand = entities[1].value;
+      var callCommand = entities[2].value;
+      var dialCommand = entities[3].value;
+      var specialAppPhone = entities[4].value;
+      var specialAppContacts = entities[5].value;
       var appsGrammar = AppStore.getAppsGrammar() || 'unavailable';
       var contactsGrammar = AppStore.getContactsGrammar() || 'unknown';
       var grammar = `
@@ -53,7 +55,8 @@ class StandingByActions {
           public <simple> =
             ${ openCommand } <app> |
             ${ dialCommand } <digit>+ |
-            ${ callCommand } <contact>
+            ${ callCommand } <contact> |
+            ${ playCommand }
           ;
       `;
 
@@ -115,7 +118,9 @@ class StandingByActions {
       'standingBy__dialCommand',
       'standingBy__dialCommandCue',
       'standingBy__specialAppPhone',
-      'standingBy__specialAppContacts'
+      'standingBy__specialAppContacts',
+      'standingBy__playCommand',
+      'standingBy__playCommandCue'
     ]).then((entities) => {
       var openCommand = entities[0].value;
       var openCommandCue = entities[1].value === 'start' ? 'startsWith' : 'endsWith';
@@ -125,6 +130,8 @@ class StandingByActions {
       var dialCommandCue = entities[5].value === 'start' ? 'startsWith' : 'endsWith';
       var specialAppPhone = entities[6].value;
       var specialAppContacts = entities[7].value;
+      var playCommand = entities[8].value;
+      var playCommandCue = entities[9].value === 'start' ? 'startsWith' : 'endsWith';
 
       if (command[callCommandCue](callCommand)) {
         debug('_interpreter:callCommand', command);
@@ -218,6 +225,9 @@ class StandingByActions {
 
           StandingByStore.updateText('');
         });
+      }
+      else if (command[playCommandCue](playCommand)) {
+        DisplayActions.changeViews('vaani-play-music');
       }
       else {
         debug('Unable to match interpretation');

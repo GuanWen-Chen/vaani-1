@@ -49,6 +49,8 @@
 >
 <standingBy__openCommand "open">
 <standingBy__openCommandCue "start"> /* enum: start | end */
+<standingBy__playCommand "play music">
+<standingBy__playCommandCue "start"> /* enum: start | end */
 <standingBy__callCommand "call">
 <standingBy__callCommandCue "start"> /* enum: start | end */
 <standingBy__dialCommand "dial">
@@ -71,3 +73,11 @@
 <callContact__iWasntAbleToCall "I'm sorry, I wasn't able to make the call."
   spoken: "I'm sorry, I wasn't able to make the call."
 >
+
+<playMusic__playCommand "play">
+<playMusic__pauseCommand "pause">
+<playMusic__skipForwardCommand "next">
+<playMusic__skipBackwardCommand "previous">
+<playMusic__stopCommand "stop">
+<playMusic__queryAlbumCommand "what album is this">
+<playMusic__queryArtistCommand "who is this artist">

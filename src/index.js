@@ -15,6 +15,8 @@ import './components/toolbar';
 import './components/standing-by';
 import './components/call-number';
 import './components/call-contact';
+import './components/play-music';
+import './components/show-music-info';
 
 
 var debug = Debug('App');
